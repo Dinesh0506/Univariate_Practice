@@ -13,6 +13,9 @@ class Univariate():
     def univariate(dataset,quan):
         descriptive=pd.DataFrame(index=["mean","median","mode","Q1:25%","Q2:50%","Q3:75%",99,"Q4:100%","IQR",
                                     "1.5rule","lesser","greater","min","max"],columns=quan)
+    def univariate(dataset,quan):
+        descriptive=pd.DataFrame(index=["mean","median","mode","Q1:25%","Q2:50%","Q3:75%",99,"Q4:100%","IQR","1.5rule"
+                                        ,"lesser","greater","min","max","Skew","Kurtosis","Variance","Standard_Deviation"],columns=quan)
         for columnName in quan:
            descriptive[columnName]["mean"]=dataset[columnName].mean()
            descriptive[columnName]["median"]=dataset[columnName].median()
@@ -28,6 +31,10 @@ class Univariate():
            descriptive[columnName]["greater"]=descriptive[columnName]["Q3:75%"]+descriptive[columnName]["1.5rule"] 
            descriptive[columnName]["min"] =dataset[columnName].min()
            descriptive[columnName]["max"]=dataset[columnName].max() 
+           descriptive[columnName]["Skew"]=dataset[columnName].skew() 
+           descriptive[columnName]["Kurtosis"]=dataset[columnName].kurtosis() 
+           descriptive[columnName]["Variance"]=dataset[columnName].var() 
+           descriptive[columnName]["Standard_Deviation"]=dataset[columnName].std() 
         return descriptive
 
     def outliercolumnName(lesser,greater):
